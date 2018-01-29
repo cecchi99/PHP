@@ -4,36 +4,37 @@
     <title>Gioco dell'indovina-numero</title>
   </head>
   <body>
+    <h1>Gioco dell'indovina-numero</h1>
     
     <?php
-     $tentativi;
      $number=30;
-     $indizio="";
-     if(isset($_POST["send"])==false)
+    
+     if(isset($_GET["send"])==false)
      {
-       $tentativi=0;
+       $_GET["tentativi"]=1;
      }
-     if(isset($_POST["user_number"]))
+    
+     if(isset($_GET["user_number"]))
      {
-       $tentativi++;
+       $_GET["tentativi"]++;
        
-       if($_POST["user_number"]>$number)
+       if($_GET["user_number"]>$number)
        {
-         $indizio="Il numero è troppo grande!";
+         echo "Il numero è troppo grande!"."<br/>";
        }
-       else if ($_POST["user_number"]<$number)
+       else if ($_GET["user_number"]<$number)
        {
-         $indizio="Il numero è troppo piccolo!";
+         echo "Il numero è troppo piccolo!"."<br/>";
        }
      }
+    
+     echo "Tentativo n.".$_GET["tentativi"]."<br/>";
     ?>
     
-    <h1>Gioco dell'indovina-numero</h1>
-    <?php echo ($indizio) ?>
-    <p>Tentativo n.<?php echo ($tentativi) ?></p>
     <b>Inserisci il numero</b>
-    <form method="post" action="">
+    <form method="get" action="">
       <input type="text" name="user_number">
+      <input type="hidden" name="tentativi" value="<?php echo $_GET["tentativi"] ?>">
       <input type="submit" name="send" value="Conferma">
     </form>
   </body>
