@@ -17,24 +17,35 @@
     
      if($_GET["tentativi"]==7)
      {
-       echo "fine tentativi!"."<br/>";
+       ?>
+         <h2>Spiacenti...</h2>
+         <p>hai superato il max di 7 tentativi.</p>
+         <form method="get" action="index.html">
+           <input type="submit" name="restart" value="Gioca di nuovo">
+         </form>
+       <?php
      }
      else if(isset($_GET["user_number"]))
      {
-       $_GET["tentativi"]++;
-       
        if($_GET["user_number"]>$_GET["number"])
        {
-         echo "Il numero è troppo grande!"."<br/>";
+         echo "Il numero e' troppo grande!"."<br/>";
        }
        else if ($_GET["user_number"]<$_GET["number"])
        {
-         echo "Il numero è troppo piccolo!"."<br/>";
+         echo "Il numero e' troppo piccolo!"."<br/>";
        }
        else
-       {
-         echo "indovinato!"."<br/>";
+       {?>
+         <h2>BRAVO!</h2>
+         <p>Hai indovinato in <?php echo $_GET["tentativi"] ?> tentativi.</p>
+         <form method="get" action="index.html">
+           <input type="submit" name="restart" value="Gioca di nuovo">
+         </form>
+       <?php
        }
+       
+       $_GET["tentativi"]++;
      }
     
      echo "Tentativo n.".$_GET["tentativi"]."<br/>";
