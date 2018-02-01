@@ -13,8 +13,6 @@
        $_GET["number"]=rand(1,100);
      }
     
-     echo $_GET["number"];
-    
      if($_GET["tentativi"]==7)
      {
        ?>
@@ -47,10 +45,9 @@
        
        $_GET["tentativi"]++;
      }
-    
-     echo "Tentativo n.".$_GET["tentativi"]."<br/>";
     ?>
     
+    <p>Tentativo n.<?php echo $_GET["tentativi"] ?></p>
     <b>Inserisci il numero</b>
     <form method="get" action="">
       <input type="text" name="user_number">
