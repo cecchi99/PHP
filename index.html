@@ -4,17 +4,17 @@
   </head>
   <body>
     
-    <script type="text/javascript">
-      function isEmpty()
+    <script>
+      function Check()
       {
-        var cognome=document.forms["form"]["cognome"].value;
-        var nome=document.forms["form"]["nome"].value;
-        var email=document.forms["form"]["email"].value;
-        var password=document.forms["form"]["password"].value;
-        
-        if(cognome==""||nome==""||email==""||password=="")
+        if(form.cognome.value==""||form.nome.value==""||form.email.value==""||form.password.value==""||form.check_password.value=="")
         {
           alert("Impossibile elaborare campi vuoti!");
+          return false;
+        }
+        else if(form.password.value!=form.check_password.value)
+        {
+          alert("Le password non coincidono!");
           return false;
         }
         return true;
@@ -22,7 +22,7 @@
     </script>
     
     <h1>Modulo di iscrizione</h1>
-    <form name="form" method="post" action="riepilogo.php"  onsubmit="return isEmpty()">
+    <form name="form" method="post" action="riepilogo.php" onsubmit="return Check()">
       Cognome: <input type="text" name="cognome"><br>
       Nome: <input type="text" name="nome"><br>
       Sesso: <input type="radio" name="sesso" value="maschio" checked>Maschile  <input type="radio" name="sesso" value="femmina">Femminile<br>
@@ -39,6 +39,7 @@
       Patente: <input type="checkbox" name="patente_a" value="cat. A">cat. A <input type="checkbox" name="patente_b" value="cat. B">cat. B<br>
       e-Mail: <input type="email" name="email"><br>
       Password: <input type="password" name="password"><br>
+      Verifica password: <input type="password" name="check_password"><br>
       <input type="reset" name="delete" value="Annulla">
       <input type="submit" name="send" value="Conferma">
     </form>
