@@ -3,8 +3,26 @@
     <title>Modulo di iscrizione</title>
   </head>
   <body>
+    
+    <script type="text/javascript">
+      function isEmpty()
+      {
+        var cognome=document.forms["form"]["cognome"].value;
+        var nome=document.forms["form"]["nome"].value;
+        var email=document.forms["form"]["email"].value;
+        var password=document.forms["form"]["password"].value;
+        
+        if(cognome==""||nome==""||email==""||password=="")
+        {
+          alert("Impossibile elaborare campi vuoti!");
+          return false;
+        }
+        return true;
+      }
+    </script>
+    
     <h1>Modulo di iscrizione</h1>
-    <form method="post" action="riepilogo.php">
+    <form name="form" method="post" action="riepilogo.php"  onsubmit="return isEmpty()">
       Cognome: <input type="text" name="cognome"><br>
       Nome: <input type="text" name="nome"><br>
       Sesso: <input type="radio" name="sesso" value="maschio" checked>Maschile  <input type="radio" name="sesso" value="femmina">Femminile<br>
