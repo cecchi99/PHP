@@ -21,18 +21,26 @@
     if(isset($_POST["patente_a"])&&isset($_POST["patente_b"])==false)
     {
       echo $_POST["patente_a"]."<br>";
+      $_POST["patente_a"]=true;
+      $_POST["patente_b"]=false;
     }
     else if(isset($_POST["patente_a"])==false&&isset($_POST["patente_b"]))
     {
       echo $_POST["patente_b"]."<br>";
+      $_POST["patente_a"]=false;
+      $_POST["patente_b"]=true;
     }
     else if(isset($_POST["patente_a"])==false&&isset($_POST["patente_b"])==false)
     {
       echo "nessuna"."<br>";
+      $_POST["patente_a"]=false;
+      $_POST["patente_b"]=false;
     }
     else
     {
       echo $_POST["patente_a"]." ".$_POST["patente_b"]."<br>";
+      $_POST["patente_a"]=true;
+      $_POST["patente_b"]=true;
     }
     echo("e-Mail: ").$_POST["email"]."<br>";
     ?>
