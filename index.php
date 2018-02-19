@@ -26,7 +26,7 @@
       Cognome: <input type="text" name="cognome"><br>
       Nome: <input type="text" name="nome"><br>
       Sesso: <input type="radio" name="sesso" value="maschio" checked>Maschile  <input type="radio" name="sesso" value="femmina">Femminile<br>
-      Nazionalita': <select name="nazionalità">
+      Nazionalita': <select name="nazionalita">
                      <option value="italiana">Italiana</option>
                      <option value="inglese">Inglese</option>
                      <option value="americana">Americana</option>

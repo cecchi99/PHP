@@ -15,15 +15,15 @@
       $dbh=new PDO($connection,$username,$password);
       $dbh->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
       
-      $query=$dbh->prepare("INSERT INTO iscrizione(cognome,nome,sesso,nazionalità,patente_a,patente_b,email,password) VALUES(:cognome,:nome,:sesso,:nazionalità,:patente_a,:patente_b,:email,:password)");
+      $query=$dbh->prepare("INSERT INTO iscrizione(cognome,nome,sesso,nazionalita,patente_a,patente_b,email,password) VALUES(:cognome,:nome,:sesso,:nazionalita,:patente_a,:patente_b,:email,:password)");
       $query->bindValue(":cognome",$_POST["cognome"]);
       $query->bindValue(":nome",$_POST["nome"]);
       $query->bindValue(":sesso",$_POST["sesso"]);
-      $query->bindValue(":nazionalità",$_POST["nazionalità"]);
+      $query->bindValue(":nazionalita",$_POST["nazionalita"]);
       $query->bindValue(":patente_a",$_POST["patente_a"]);
       $query->bindValue(":patente_b",$_POST["patente_b"]);
       $query->bindValue(":email",$_POST["email"]);
-      $query->bindValue(":password",$_POST["password"]);
+      $query->bindValue(":password",md5($_POST["password"]));
       
       if($query->execute())
       {
@@ -40,7 +40,7 @@
     }
     ?>
     
-    <form method="get" action="index.html">
+    <form method="get" action="index.php">
       <input type="submit" name="restart" value="Chiudi">
     </form>
   </body>
