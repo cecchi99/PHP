@@ -7,22 +7,31 @@
     <script>
       function Check()
       {
-        if(form.cognome.value==""||form.nome.value==""||form.email.value==""||form.password.value==""||form.check_password.value=="")
+        if(registerform.cognome.value==""||registerform.nome.value==""||registerform.email.value==""||registerform.password.value==""||registerform.check_password.value=="")
         {
           alert("Impossibile elaborare campi vuoti!");
           return false;
         }
-        else if(form.password.value!=form.check_password.value)
+        else if(registerform.password.value!=registerform.check_password.value)
         {
           alert("Le password non coincidono!");
           return false;
         }
         return true;
       }
+      
+      function isEmpty()
+      {
+        if(loginform.email.value==""||loginform.password.value=="")
+        {
+          alert("Impossibile accedere con campi vuoti!");
+          return false; 
+        }
+      }
     </script>
     
     <h1>Modulo di iscrizione</h1>
-    <form name="form" method="post" action="riepilogo.php" onsubmit="return Check()">
+    <form name="registerform" method="post" action="riepilogo.php" onsubmit="return Check()">
       Cognome: <input type="text" name="cognome"><br>
       Nome: <input type="text" name="nome"><br>
       Sesso: <input type="radio" name="sesso" value="maschio" checked>Maschile  <input type="radio" name="sesso" value="femmina">Femminile<br>
@@ -41,7 +50,14 @@
       Password: <input type="password" name="password"><br>
       Verifica password: <input type="password" name="check_password"><br>
       <input type="reset" name="delete" value="Annulla">
-      <input type="submit" name="send" value="Conferma">
+      <input type="submit" name="send" value="Conferma"><br>
+    </form>
+    
+    <p>Hai gia' un account?</p>
+    <form name="loginform" method="post" action="user.php" onsubmit="return isEmpty()">
+      e-Mail: <input type="email" name="email"><br>
+      Password: <input type="password" name="password"><br>
+      <input type="submit" name="login" value="Accedi">
     </form>
   </body>
 </html>
