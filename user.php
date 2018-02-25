@@ -5,7 +5,7 @@
   <body>
     <h1>Pagina utente</h1>
     
-    <p>Dati utente:</p>
+    <p>Hai eseguito l'accesso con:</p>
     <?php
     echo "e-Mail: ".$_POST["email"];
     ?>

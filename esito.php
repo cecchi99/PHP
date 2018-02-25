@@ -27,11 +27,11 @@
       
       if($query->execute())
       {
-        echo "<h2>Dati correttamente registrati</h2>";
+        echo "Dati correttamente registrati";
       }
       else
       {
-        echo "<h2>Errore nella registrazione!</h2>";
+        echo "Errore nella registrazione!";
       }
     }
     catch(PDOException $e)
