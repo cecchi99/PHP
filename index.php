@@ -14,6 +14,6 @@ if(isset($_SESSION["email"]))
     <h1>Home</h1>
     
     <a href="register.php">Registrati</a><br>
-    <a href="user.php">Accedi</a>
+    <a href="login.php">Accedi</a>
   </body>
 </html>
