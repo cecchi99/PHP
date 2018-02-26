@@ -1,3 +1,5 @@
+<?php session_start(); ?>
+
 <html>
   <head>
     <title>Modulo di accesso</title>
@@ -11,11 +13,6 @@
           alert("Impossibile accedere con campi vuoti!");
           return false; 
         }
-      }
-      
-      function goBack() 
-      {
-        window.history.back();
       }
     </script>
     
@@ -39,9 +36,12 @@
         
         $query->execute();
         
-        if($query->fetch()>0)
+        if($query->rowCount()>0)
         {
-          echo "Accesso eseguito con: ".$_POST["email"]."<br>";
+          $row=$query->fetch();
+          $_SESSION["email"]=$row["email"];
+          
+          echo "Accesso eseguito con: ".$_SESSION["email"]."<br>";
         }
         else
         {
@@ -62,9 +62,11 @@
       e-Mail: <input type="email" name="email"><br>
       Password: <input type="password" name="password"><br>
       <input type="submit" name="login" value="Accedi">
-      <?php } ?>
-      <input type="button" name="return" value="Indietro" onclick="goBack()">
     </form>
+    
+    <?php } ?>
+    
+    <a href="index.php">Home</a>
     
   </body>
 </html>
