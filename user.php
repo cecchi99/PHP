@@ -1,17 +1,32 @@
 <html>
   <head>
-    <title>Pagina utente</title>
+    <title>Modulo di accesso</title>
   </head>
   <body>
-    <h1>Pagina utente</h1>
+    <script>
+      function isEmpty()
+      {
+        if(loginform.email.value==""||loginform.password.value=="")
+        {
+          alert("Impossibile accedere con campi vuoti!");
+          return false; 
+        }
+      }
+      
+      function goBack() 
+      {
+        window.history.back();
+      }
+    </script>
     
-    <p>Hai eseguito l'accesso con:</p>
-    <?php
-    echo "e-Mail: ".$_POST["email"];
-    ?>
+    <h1>Modulo di accesso</h1>
     
-    <form method="get" action="index.php">
-      <input type="submit" name="return" value="Esci">
+    <p>Hai gia' un account?</p>
+    <form name="loginform" method="post" action="index.php" onsubmit="return isEmpty()">
+      e-Mail: <input type="email" name="email"><br>
+      Password: <input type="password" name="password"><br>
+      <input type="submit" name="login" value="Accedi">
+      <input type="button" name="return" value="Indietro" onclick="goBack()">
     </form>
   </body>
 </html>
