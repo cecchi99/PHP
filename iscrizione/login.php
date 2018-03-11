@@ -66,7 +66,9 @@
     
     <?php } ?>
     
-    <a href="index.php">Home</a>
+    <form method="get" action="index.php">
+      <input type="submit" name="return" value="Home">
+    </form>
     
   </body>
 </html>
