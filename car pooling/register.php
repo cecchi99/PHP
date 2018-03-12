@@ -3,6 +3,23 @@
     <title>Car pooling</title>
   </head>
   <body>
+    
+    <script>
+      function Check()
+      {
+        if(registerform.cognome.value==""||registerform.nome.value==""||registerform.email.value==""||registerform.password.value==""||registerform.telefono.value==""||registerform.nascita.value=="")
+        {
+          alert("Impossibile elaborare campi vuoti!");
+          return false;
+        }
+        else if(registerform.password.value!=registerform.check_password.value)
+        {
+          alert("Le password non coincidono!");
+          return false;
+        }
+      }
+    </script>
+    
     <h1>Registrazione</h1>
     
     <?php
@@ -15,7 +32,7 @@
       $dbh=new PDO($connection,$username,$password);
       $dbh->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
       
-      $query=$dbh->prepare("SELECT * FROM stati");
+      $query=$dbh->prepare("SELECT nome_stati FROM stati");
       $query->execute();
     }
     catch(Exception $e)
@@ -24,7 +41,7 @@
     }
     ?>
     
-    <form>
+    <form name="registerform" method="post" action="riepilogo.php" onsubmit="return Check()">
       Tipo utente: <input type="radio" name="tipo" value="passeggero" checked>Passeggero <input type="radio" name="tipo" value="autista">Autista<br>
       Cognome: <input type="text" name="nome"><br>
       Nome: <input type="text" name="cognome"><br>
@@ -38,7 +55,7 @@
                     <?php
                     while($row=$query->fetch())
                     {
-                      echo "<option value=".$row["id_stati"].">".$row["nome_stati"];
+                      echo "<option value=".$row["nome_stati"].">".$row["nome_stati"];
                     }
                     ?>
                     </select><br>
