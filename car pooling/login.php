@@ -2,7 +2,7 @@
 
 <html>
   <head>
-    <title>Modulo di accesso</title>
+    <title>Car pooling</title>
   </head>
   <body>
     <script>
@@ -16,7 +16,7 @@
       }
     </script>
     
-    <h1>Modulo di accesso</h1>
+    <h1>Accedi</h1>
     
     <?php
     if(isset($_POST["login"]))
@@ -30,9 +30,18 @@
         $dbh=new PDO($connection,$username,$password);
         $dbh->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
         
-        $query=$dbh->prepare("SELECT email, password FROM iscrizione WHERE email=:email AND password=:password");
-        $query->bindValue(":email",$_POST["email"]);
-        $query->bindValue(":password",md5($_POST["password"]));
+        if($_POST["tipo"]=="passeggero")
+        {
+          $query=$dbh->prepare("SELECT email, password FROM Passeggero WHERE email=:email AND password=:password");
+          $query->bindValue(":email",$_POST["email"]);
+          $query->bindValue(":password",md5($_POST["password"]));
+        }
+        else
+        {
+          $query=$dbh->prepare("SELECT email, password FROM Autista WHERE email=:email AND password=:password");
+          $query->bindValue(":email",$_POST["email"]);
+          $query->bindValue(":password",md5($_POST["password"]));
+        }
         
         $query->execute();
         
@@ -58,16 +67,16 @@
     ?>
     
     <form name="loginform" method="post" action="" onsubmit="return isEmpty()">
-      e-Mail: <input type="email" name="email"><br>
+      Tipo utente: <input type="radio" name="tipo" value="passeggero" checked>Passeggero <input type="radio" name="tipo" value="autista">Autista<br>
+      Email: <input type="email" name="email"><br>
       Password: <input type="password" name="password"><br>
       <input type="submit" name="login" value="Accedi">
+      <input type="reset" name="delete" value="Cancella">
     </form>
     
     <?php } ?>
     
-    <form method="get" action="index.php">
-      <input type="submit" name="return" value="Home">
-    </form>
+    <a href="index.php">Home</a>
     
   </body>
 </html>

@@ -62,7 +62,7 @@
       Numero patente: <input type="text" name="patente"><br>
       Scadenza patente: <input type="date" name="scadenza"><br> 
       <input type="submit" name="register" value="Registra">
-      <input type="reset" name="delete" value="cancella">
+      <input type="reset" name="delete" value="Cancella">
     </form>
   </body>
 </html>

@@ -18,22 +18,40 @@
       if($_POST["tipo"]=="passeggero")
       {
         $query=$dbh->prepare("INSERT INTO Passeggero(cognome,nome,email,password,telefono,dataNascita,sesso,nazionalita) VALUES (:cognome,:nome,:email,:password,:telefono,:dataNascita,:sesso,:nazionalita)");
+        
+        $query->bindValue(":cognome",$_POST["cognome"]);
+        $query->bindValue(":nome",$_POST["nome"]);
+        $query->bindValue(":email",$_POST["email"]);
+        $query->bindValue(":password",md5($_POST["password"]));
+        $query->bindValue(":telefono",$_POST["telefono"]);
+        $query->bindValue(":dataNascita",$_POST["nascita"]);
+        $query->bindValue(":sesso",$_POST["sesso"]);
+        $query->bindValue(":nazionalita",$_POST["nazionalita"]);
       }
       else
       {
         $query=$dbh->prepare("INSERT INTO Autista(cognome,nome,email,password,telefono,dataNascita,sesso,nazionalita,numeroPatente,scadenzaPatente) VALUES (:cognome,:nome,:email,:password,:telefono,:dataNascita,:sesso,:nazionalita,:numeroPatente,:scadenzaPatente)");
+        
+        $query->bindValue(":cognome",$_POST["cognome"]);
+        $query->bindValue(":nome",$_POST["nome"]);
+        $query->bindValue(":email",$_POST["email"]);
+        $query->bindValue(":password",md5($_POST["password"]));
+        $query->bindValue(":telefono",$_POST["telefono"]);
+        $query->bindValue(":dataNascita",$_POST["nascita"]);
+        $query->bindValue(":sesso",$_POST["sesso"]);
+        $query->bindValue(":nazionalita",$_POST["nazionalita"]);
+        $query->bindValue(":numeroPatente",$_POST["patente"]);
+        $query->bindValue(":scadenzaPatente",$_POST["scadenza"]);
       }
       
-      $query->bindValue(":cognome",$_POST["cognome"]);
-      $query->bindValue(":nome",$_POST["nome"]);
-      $query->bindValue(":email",$_POST["email"]);
-      $query->bindValue(":password",md5($_POST["password"]));
-      $query->bindValue(":telefono",$_POST["telefono"]);
-      $query->bindValue(":dataNascita",$_POST["nascita"]);
-      $query->bindValue(":sesso",$_POST["sesso"]);
-      $query->bindValue(":nazionalita",$_POST["nazionalita"]);
-      $query->bindValue(":numeroPatente",$_POST["patente"]);
-      $query->bindValue(":scadenzaPatente",$_POST["scadenza"]);
+      if($query->execute()==false)
+        {
+          echo "Errore nella registrazione!";
+        }
+        else
+        {
+          echo "Registrazione ".$_POST["tipo"]." completata!";
+        }
     }
     catch(exception $e)
     {
