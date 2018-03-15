@@ -49,6 +49,7 @@
         {
           $row=$query->fetch();
           $_SESSION["email"]=$row["email"];
+          $_SESSION["tipo"]=$_POST["tipo"];
           
           echo "Accesso eseguito con: ".$_SESSION["email"]."<br>";
         }
