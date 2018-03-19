@@ -11,10 +11,19 @@
           alert("Impossibile elaborare campi vuoti!");
           return false;
         }
-        
+        else if(viaggioform.oraPartenza.value>=viaggioform.oraArrivo.value)
+        {
+          alert("L' ora di partenza non può essere maggiore o uguale a quella di arrivo!")
+          return false;
+        }
         else if(Number.isNaN(Number.parseFloat(viaggioform.importo.value)))
         {
-          alert("L' importo deve essere un valore decimale!");
+          alert("L' importo deve essere un valore numerico!");
+          return false;
+        }
+        else if(Number.isNaN(Number.parseInt(viaggioform.durata.value)))
+        {
+          alert("La durata deve essere un valore numerico!");
           return false;
         }
       }

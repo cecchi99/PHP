@@ -41,7 +41,7 @@
     }
     ?>
     
-    <form name="registerform" method="post" action="riepilogo.php" onsubmit="return Check()">
+    <form name="registerform" method="post" action="riepilogoRegister.php" onsubmit="return Check()">
       Tipo utente: <input type="radio" name="tipo" value="passeggero" checked>Passeggero <input type="radio" name="tipo" value="autista">Autista<br>
       Cognome: <input type="text" name="nome"><br>
       Nome: <input type="text" name="cognome"><br>
