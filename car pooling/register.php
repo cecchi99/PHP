@@ -63,6 +63,8 @@
       Scadenza patente: <input type="date" name="scadenza"><br> 
       <input type="submit" name="register" value="Registra">
       <input type="reset" name="delete" value="Cancella">
+      
+      <a href="index.php">Home</a>
     </form>
   </body>
 </html>

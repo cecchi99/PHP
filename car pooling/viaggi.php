@@ -11,9 +11,14 @@
           alert("Impossibile elaborare campi vuoti!");
           return false;
         }
+        else if(viaggioform.partenza.value==viaggioform.destinazione.value)
+        {
+          alert("La citta' di partenza non puo' essere uguale a quella di destinazione!");
+          return false;
+        }
         else if(viaggioform.oraPartenza.value>=viaggioform.oraArrivo.value)
         {
-          alert("L' ora di partenza non può essere maggiore o uguale a quella di arrivo!")
+          alert("L' ora di partenza non puo' essere maggiore o uguale a quella di arrivo!")
           return false;
         }
         else if(Number.isNaN(Number.parseFloat(viaggioform.importo.value)))
@@ -27,9 +32,97 @@
           return false;
         }
       }
+      
+      function goBack() 
+      {
+        window.history.back();
+      }
     </script>
     
     <h1>Creazione viaggio</h1>
+    
+    <?php
+    if(isset($_POST["crea"]))
+    {
+      if(isset($_POST["send"]))
+      {
+        $connection="mysql:host=localhost;dbname=quintab_cecchi";
+        $username="root";
+        $password="quintab";
+        
+        try
+        {
+          $dbh=new PDO($connection,$username,$password);
+          $dbh->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
+          
+          $query=$dbh->prepare("INSERT INTO Viaggio(partenza,destinazione,data,oraPartenza,oraArrivo,importo,durata,bagagli,animali) VALUES(:partenza,:destinazione,:data,:oraPartenza,:oraArrivo,:importo,:durata,:bagagli,:animali)");
+          $query->bindValue(":partenza",$_POST["partenza"]);
+          $query->bindValue(":destinazione",$_POST["destinazione"]);
+          $query->bindValue(":data",$_POST["data"]);
+          $query->bindValue(":oraPartenza",$_POST["oraPartenza"]);
+          $query->bindValue(":oraArrivo",$_POST["oraArrivo"]);
+          $query->bindValue(":importo",$_POST["importo"]);
+          $query->bindValue(":durata",$_POST["durata"]);
+          $query->bindValue(":bagagli",$_POST["bagagli"]);
+          $query->bindValue(":animali",$_POST["animali"]);
+          
+          if($query->execute()==false)
+          {
+            echo "Errore nella creazione del viaggio!<br>";
+          }
+          else
+          {
+            echo "Viaggio creato correttamente!<br>";
+          }
+        }
+        catch(Exception $e)
+        {
+          echo $e->getMessage();
+        }
+      }
+      else
+      {
+        $bagagli=false;
+        $animali=false;
+        
+        echo "Partenza: ".$_POST["partenza"]."<br>";
+        echo "Destinazione: ".$_POST["destinazione"]."<br>";
+        echo "Data: ".$_POST["data"]."<br>";
+        echo "Ora partenza: ".$_POST["oraPartenza"]."<br>";
+        echo "Ora arrivo: ".$_POST["oraArrivo"]."<br>";
+        echo "Importo: ".$_POST["importo"]."<br>";
+        echo "Durata: ".$_POST["durata"]."<br>";
+        if(isset($_POST["bagagli"]))
+        {
+          echo "Bagagli: si<br>";
+          $bagagli=true;
+        }
+        if(isset($_POST["animali"]))
+        {
+          echo "Animali: si<br>";
+          $animali=true;
+        } ?>
+    
+    <form method="post" action="">
+      <input type="hidden" name="partenza" value="<?php echo $_POST["partenza"] ?>">
+      <input type="hidden" name="destinazione" value="<?php echo $_POST["destinazione"] ?>">
+      <input type="hidden" name="data" value="<?php echo $_POST["data"] ?>">
+      <input type="hidden" name="oraPartenza" value="<?php echo $_POST["oraPartenza"] ?>">
+      <input type="hidden" name="oraArrivo" value="<?php echo $_POST["oraArrivo"] ?>">
+      <input type="hidden" name="importo" value="<?php echo $_POST["importo"] ?>">
+      <input type="hidden" name="durata" value="<?php echo $_POST["durata"] ?>">  
+      <input type="hidden" name="bagagli" value="<?php echo $bagagli ?>">
+      <input type="hidden" name="animali" value="<?php echo $animali ?>">
+      <input type="hidden" name="crea" value="<?php echo true ?>">
+      <input type="submit" name="send" value="Conferma">
+      <input type="button" name="edit" value="Correggi" onclick="goBack()">
+    </form>
+    
+      <?php }
+    }
+    else
+    {
+    ?>
     
     <form name="viaggioform" method="post" action="" onsubmit="return Check()">
       Partenza: <input type="text" name="partenza"><br>
@@ -44,6 +137,8 @@
       <input type="submit" name="crea" value="Crea viaggio">
       <input type="reset" name="delete" value="Cancella">
     </form>
+    
+    <?php } ?>
     
     <a href="index.php">Home</a>
   </body>
