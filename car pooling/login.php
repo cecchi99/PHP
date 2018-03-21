@@ -32,13 +32,13 @@
         
         if($_POST["tipo"]=="passeggero")
         {
-          $query=$dbh->prepare("SELECT email, password FROM Passeggero WHERE email=:email AND password=:password");
+          $query=$dbh->prepare("SELECT idPasseggero, email, password FROM Passeggero WHERE email=:email AND password=:password");
           $query->bindValue(":email",$_POST["email"]);
           $query->bindValue(":password",md5($_POST["password"]));
         }
         else
         {
-          $query=$dbh->prepare("SELECT email, password FROM Autista WHERE email=:email AND password=:password");
+          $query=$dbh->prepare("SELECT idAutista, email, password FROM Autista WHERE email=:email AND password=:password");
           $query->bindValue(":email",$_POST["email"]);
           $query->bindValue(":password",md5($_POST["password"]));
         }
@@ -50,6 +50,15 @@
           $row=$query->fetch();
           $_SESSION["email"]=$row["email"];
           $_SESSION["tipo"]=$_POST["tipo"];
+          
+          if($_SESSION["tipo"]=="passeggero")
+          {
+            $_SESSION["idPasseggero"]=$row["idPasseggero"];
+          }
+          else
+          {
+            $_SESSION["idAutista"]=$row["idAutista"];
+          }
           
           echo "Accesso eseguito con: ".$_SESSION["email"]."<br>";
         }
