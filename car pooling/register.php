@@ -81,7 +81,7 @@
         }
         catch(exception $e)
         {
-          echo $e->getMessage();
+          echo $e->getMessage()."<br>";
         }
       }
       else

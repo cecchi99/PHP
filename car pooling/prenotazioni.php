@@ -73,10 +73,10 @@
         } ?>
     
     <form method="post" action="">
-      <input type="hidden" name="viaggio" echo="<?php echo $_POST["viaggio"] ?>">
-      <input type="hidden" name="data" echo="<?php echo $_POST["data"] ?>">
-      <input type="hidden" name="open" echo="<?php echo $open ?>">
-      <input type="hidden" name="crea" echo="<?php echo true ?>">
+      <input type="hidden" name="viaggio" value="<?php echo $_POST["viaggio"] ?>">
+      <input type="hidden" name="data" value="<?php echo $_POST["data"] ?>">
+      <input type="hidden" name="open" value="<?php echo $open ?>">
+      <input type="hidden" name="crea" value="<?php echo true ?>">
       <input type="submit" name="send" value="Conferma">
       <input type="button" name="edit" value="Correggi" onclick="goBack()">
     </form>
