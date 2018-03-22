@@ -21,8 +21,7 @@ if(!isset($_SESSION["email"]))
     else
     {
       echo "<a href='viaggi.php'>Aggiungi viaggio</a><br>";
-      echo "<a href='apriPrenotazione.php'>Apri prenotazione</a><br>";
-      echo "<a href='chiudiPrenotazione.php'>Chiudi prenotazione</a><br>";      
+      echo "<a href='prenotazioni.php'>Aggiungi prenotazione</a><br>";
     }
     ?>
     

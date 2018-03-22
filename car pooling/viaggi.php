@@ -1,3 +1,5 @@
+<?php session_start(); ?>
+
 <html>
   <head>
     <title>Car pooling</title>
@@ -55,7 +57,7 @@
           $dbh=new PDO($connection,$username,$password);
           $dbh->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
           
-          $query=$dbh->prepare("INSERT INTO Viaggio(partenza,destinazione,data,oraPartenza,oraArrivo,importo,durata,bagagli,animali) VALUES(:partenza,:destinazione,:data,:oraPartenza,:oraArrivo,:importo,:durata,:bagagli,:animali)");
+          $query=$dbh->prepare("INSERT INTO Viaggio(partenza,destinazione,data,oraPartenza,oraArrivo,importo,durata,bagagli,animali,idAutista) VALUES(:partenza,:destinazione,:data,:oraPartenza,:oraArrivo,:importo,:durata,:bagagli,:animali,:idAutista)");
           $query->bindValue(":partenza",$_POST["partenza"]);
           $query->bindValue(":destinazione",$_POST["destinazione"]);
           $query->bindValue(":data",$_POST["data"]);
@@ -65,6 +67,7 @@
           $query->bindValue(":durata",$_POST["durata"]);
           $query->bindValue(":bagagli",$_POST["bagagli"]);
           $query->bindValue(":animali",$_POST["animali"]);
+          $query->bindValue(":idAutista",$_SESSION["idAutista"]);
           
           if($query->execute()==false)
           {
@@ -77,7 +80,7 @@
         }
         catch(Exception $e)
         {
-          echo $e->getMessage();
+          echo $e->getMessage()."<br>";
         }
       }
       else
@@ -101,7 +104,8 @@
         {
           echo "Animali: si<br>";
           $animali=true;
-        } ?>
+        }
+    ?>
     
     <form method="post" action="">
       <input type="hidden" name="partenza" value="<?php echo $_POST["partenza"] ?>">
