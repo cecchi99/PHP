@@ -44,14 +44,14 @@
     <h1>Creazione viaggio</h1>
     
     <?php
+    $connection="mysql:host=localhost;dbname=quintab_cecchi";
+    $username="root";
+    $password="quintab";
+    
     if(isset($_POST["crea"]))
     {
       if(isset($_POST["send"]))
       {
-        $connection="mysql:host=localhost;dbname=quintab_cecchi";
-        $username="root";
-        $password="quintab";
-        
         try
         {
           $dbh=new PDO($connection,$username,$password);
@@ -130,11 +130,7 @@
     else
     {
       try
-      {
-       $connection="mysql:host=localhost;dbname=quintab_cecchi";
-       $username="root";
-       $password="quintab"; 
-        
+      { 
        $dbh=new PDO($connection,$username,$password);
        $dbh->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
       
