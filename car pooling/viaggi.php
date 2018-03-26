@@ -57,7 +57,7 @@
           $dbh=new PDO($connection,$username,$password);
           $dbh->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
           
-          $query=$dbh->prepare("INSERT INTO Viaggio(partenza,destinazione,data,oraPartenza,oraArrivo,importo,durata,bagagli,animali,idAutista) VALUES(:partenza,:destinazione,:data,:oraPartenza,:oraArrivo,:importo,:durata,:bagagli,:animali,:idAutista)");
+          $query=$dbh->prepare("INSERT INTO Viaggio(partenza,destinazione,data,oraPartenza,oraArrivo,importo,durata,bagagli,animali,idAutista,idAuto) VALUES(:partenza,:destinazione,:data,:oraPartenza,:oraArrivo,:importo,:durata,:bagagli,:animali,:idAutista,:idAuto)");
           $query->bindValue(":partenza",$_POST["partenza"]);
           $query->bindValue(":destinazione",$_POST["destinazione"]);
           $query->bindValue(":data",$_POST["data"]);
@@ -65,6 +65,7 @@
           $query->bindValue(":oraArrivo",$_POST["oraArrivo"]);
           $query->bindValue(":importo",$_POST["importo"]);
           $query->bindValue(":durata",$_POST["durata"]);
+          $query->bindValue(":idAuto",$_POST["auto"]);
           $query->bindValue(":bagagli",$_POST["bagagli"]);
           $query->bindValue(":animali",$_POST["animali"]);
           $query->bindValue(":idAutista",$_SESSION["idAutista"]);
@@ -95,6 +96,7 @@
         echo "Ora arrivo: ".$_POST["oraArrivo"]."<br>";
         echo "Importo: ".$_POST["importo"]."<br>";
         echo "Durata: ".$_POST["durata"]."<br>";
+        echo "Auto: ".$_POST["auto"]."<br>";
         if(isset($_POST["bagagli"]))
         {
           echo "Bagagli: si<br>";
@@ -117,6 +119,7 @@
       <input type="hidden" name="durata" value="<?php echo $_POST["durata"] ?>">  
       <input type="hidden" name="bagagli" value="<?php echo $bagagli ?>">
       <input type="hidden" name="animali" value="<?php echo $animali ?>">
+      <input type="hidden" name="auto" value="<?php echo $_POST["auto"] ?>">
       <input type="hidden" name="crea" value="<?php echo true ?>">
       <input type="submit" name="send" value="Conferma">
       <input type="button" name="edit" value="Correggi" onclick="goBack()">
@@ -126,9 +129,27 @@
     }
     else
     {
-    ?>
-    
-    <form name="viaggioform" method="post" action="" onsubmit="return Check()">
+      try
+      {
+       $connection="mysql:host=localhost;dbname=quintab_cecchi";
+       $username="root";
+       $password="quintab"; 
+        
+       $dbh=new PDO($connection,$username,$password);
+       $dbh->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
+      
+       $query=$dbh->prepare("SELECT * FROM Auto WHERE idAutista=:idAutista");
+       $query->bindValue(":idAutista",$_SESSION["idAutista"]);
+       $query->execute();
+        
+       if($query->rowCount()==0)
+       {
+         echo "E' neccessario aver registrato almeno un auto!<br>";
+       }
+       else
+       { ?>
+          
+     <form name="viaggioform" method="post" action="" onsubmit="return Check()">
       Partenza: <input type="text" name="partenza"><br>
       Destinazione: <input type="text" name="destinazione"><br>
       Data: <input type="date" name="data"><br>
@@ -138,11 +159,25 @@
       Durata: <input type="text" name="durata"> minuti<br>
       <input type="checkbox" name="bagagli"> Bagagli<br>
       <input type="checkbox" name="animali"> Animali<br>
+      Auto: <select name="auto">
+                    <?php
+                    while($row=$query->fetch())
+                    {
+                      echo "<option value=".$row["targa"].">".$row["marca"]." ".$row["modello"];
+                    }
+                    ?>
+            </select><br>
       <input type="submit" name="crea" value="Crea viaggio">
       <input type="reset" name="delete" value="Cancella">
     </form>
     
-    <?php } ?>
+       <?php }
+      }
+      catch(Exception $e)
+      {
+        echo $e->getMessage()."<br>";
+      }
+    } ?>
     
     <a href="index.php">Home</a>
   </body>

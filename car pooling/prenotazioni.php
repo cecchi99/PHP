@@ -93,13 +93,14 @@
        $query=$dbh->prepare("SELECT * FROM Viaggio WHERE idAutista=:idAutista");
        $query->bindValue(":idAutista",$_SESSION["idAutista"]);
        $query->execute();
-     }
-     catch(Exception $e)
-     {
-       echo $e->getMessage()."<br>";
-     }
-     ?>
-    
+       
+       if($query->rowCount()==0)
+       {
+         echo "E' neccessario aver registrato almeno un viaggio!<br>";
+       }
+       else
+       { ?>
+         
     <form name="prenotaform" method="post" action="" onsubmit="return Check()">
       Viaggio: <select name="viaggio">
                     <?php
@@ -114,7 +115,14 @@
       <input type="submit" name="crea" value="Crea">
     </form>
     
-    <?php } ?>
+       <?php }
+     }
+     catch(Exception $e)
+     {
+       echo $e->getMessage()."<br>";
+     }
+    }
+     ?>
     
     <a href="index.php">Home</a>
   </body>
