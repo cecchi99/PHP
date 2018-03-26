@@ -114,7 +114,7 @@
       <input type="hidden" name="scadenza" value="<?php echo $_POST["scadenza"] ?>">
       <input type="hidden" name="register" value="<?php echo true ?>">
       <input type="submit" name="send" value="Conferma">
-      <input type="button" name="edit" value="Correggi" onclick="goBack()">
+      <input type="button" name="edit" value="Correggi" onclick="goBack()"><br>
     </form>
     
     <?php  }

@@ -78,7 +78,7 @@
       <input type="hidden" name="open" value="<?php echo $open ?>">
       <input type="hidden" name="crea" value="<?php echo true ?>">
       <input type="submit" name="send" value="Conferma">
-      <input type="button" name="edit" value="Correggi" onclick="goBack()">
+      <input type="button" name="edit" value="Correggi" onclick="goBack()"><br>
     </form>
     
     <?php  }

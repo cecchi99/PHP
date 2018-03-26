@@ -16,10 +16,11 @@ if(!isset($_SESSION["email"]))
     <?php
     if($_SESSION["tipo"]=="passeggero")
     {
-      echo "<a>Prenota viaggio</a><br>"; 
+      echo "<a href='accettazione.php'>Prenota viaggio</a><br>"; 
     }
     else
     {
+      echo "<a href='auto.php'>Aggiungi auto</a><br>";
       echo "<a href='viaggi.php'>Aggiungi viaggio</a><br>";
       echo "<a href='prenotazioni.php'>Aggiungi prenotazione</a><br>";
     }
