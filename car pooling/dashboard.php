@@ -16,7 +16,7 @@ if(!isset($_SESSION["email"]))
     <?php
     if($_SESSION["tipo"]=="passeggero")
     {
-      echo "<a href='accettazione.php'>Prenota viaggio</a><br>"; 
+      echo "<a href='accettazione.php'>Prenota viaggio</a><br>";
     }
     else
     {
@@ -24,6 +24,7 @@ if(!isset($_SESSION["email"]))
       echo "<a href='viaggi.php'>Aggiungi viaggio</a><br>";
       echo "<a href='prenotazioni.php'>Aggiungi prenotazione</a><br>";
     }
+    echo "<a href='feedback.php'>Area feedback</a><br>";
     ?>
     
     <a href="logout.php">Disconnetti</a>
