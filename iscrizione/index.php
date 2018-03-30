@@ -8,7 +8,7 @@ if(isset($_SESSION["email"]))
 
 <html>
   <head>
-    <title>Car pooling</title>
+    <title>Home</title>
   </head>
   <body>
     <h1>Home</h1>
