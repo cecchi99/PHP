@@ -19,8 +19,9 @@
         $dbh=new PDO($connection,$username,$password);
         $dbh->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
         
-        $query=$dbh->prepare("UPDATE Prenotazione SET idPasseggero=:idPasseggero WHERE idViaggio=:idViaggio AND idAutista=:idAutista");
+        $query=$dbh->prepare("UPDATE Prenotazione SET idPasseggero=:idPasseggero WHERE idPrenotazione=:idPrenotazione");
         $query->bindValue(":idPasseggero",$_POST["passeggero"]);
+        $query->bindValue(":idPrenotazione",$_POST["prenotazione"]);
         
         if($query->execute()==false)
         {
@@ -68,6 +69,7 @@
     
     <form action="" method="post">
       <input type="hidden" name="passeggero" value="<?php echo $_SESSION["idPasseggero"] ?>">
+      <input type="hidden" name="prenotazione" value="<?php echo $row["idPrenotazione"] ?>">
       <input type="submit" name="send" value="Conferma">
     </form>
     

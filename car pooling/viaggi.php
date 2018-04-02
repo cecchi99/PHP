@@ -23,14 +23,9 @@
           alert("L' ora di partenza non puo' essere maggiore o uguale a quella di arrivo!")
           return false;
         }
-        else if(Number.isNaN(Number.parseFloat(viaggioform.importo.value)))
+        else if(Number.isNaN(Number.parseFloat(viaggioform.importo.value))||Number.isNaN(Number.parseInt(viaggioform.durata.value)))
         {
-          alert("L' importo deve essere un valore numerico!");
-          return false;
-        }
-        else if(Number.isNaN(Number.parseInt(viaggioform.durata.value)))
-        {
-          alert("La durata deve essere un valore numerico!");
+          alert("L' importo e la durata devono essere valori numerici!");
           return false;
         }
       }

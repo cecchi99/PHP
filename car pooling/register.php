@@ -121,18 +121,6 @@
     }
     else
     {
-      try
-      {
-        $dbh=new PDO($connection,$username,$password);
-        $dbh->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
-      
-        $query=$dbh->prepare("SELECT nome_stati FROM stati");
-        $query->execute();
-      }
-      catch(Exception $e)
-      {
-        echo $e->getMessage();
-      }
     ?>
     
     <form name="registerform" method="post" action="" onsubmit="return Check()">
@@ -145,14 +133,7 @@
       Telefono: <input type="text" name="telefono"><br>
       Data di nascita: <input type="date" name="nascita"><br>
       Sesso: <input type="radio" name="sesso" value="m" checked>Maschio <input type="radio" name="sesso" value="f">Femmina<br>
-      Nazionalita': <select name="nazionalita">
-                    <?php
-                    while($row=$query->fetch())
-                    {
-                      echo "<option value=".$row["nome_stati"].">".$row["nome_stati"];
-                    }
-                    ?>
-                    </select><br>
+      Nazionalita': <input type="text" name="nazionalita"><br>
       Numero patente: <input type="text" name="patente"><br>
       Scadenza patente: <input type="date" name="scadenza"><br> 
       <input type="submit" name="register" value="Registra">

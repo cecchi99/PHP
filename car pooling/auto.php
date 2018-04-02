@@ -13,7 +13,7 @@
             alert("Impossibile elaborare campi vuoti!");
             return false;
           }
-        else if(Number.isNaN(Number.parseInt(autoform.cilindrata.value))||Number.isNaN(Number.parseInt(autoform.potenza.value)))
+        else if(Number.isNaN(Number.parseInt(autoform.cilindrata.value))||Number.isNaN(Number.parseFloat(autoform.potenza.value)))
           {
             alert("Cilindrata e potenza devono essere valori numerici!");
             return false;
