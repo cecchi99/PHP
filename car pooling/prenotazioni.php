@@ -37,11 +37,10 @@
           $dbh=new PDO($connection,$username,$password);
           $dbh->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
           
-          $query=$dbh->prepare("INSERT INTO Prenotazione(idAutista,idViaggio,data,disponibile) VALUES(:idAutista,:idViaggio,:data,:disponibile)");
+          $query=$dbh->prepare("INSERT INTO Prenotazione(idAutista,idViaggio,data,disponibile) VALUES(:idAutista,:idViaggio,:data,true)");
           $query->bindValue(":idAutista",$_SESSION["idAutista"]);
           $query->bindValue(":idViaggio",$_POST["viaggio"]);
           $query->bindValue(":data",$_POST["data"]);
-          $query->bindValue(":disponibile",$_POST["open"]);
           
           if($query->execute()==false)
           {
@@ -61,21 +60,11 @@
       {
         echo "Viaggio: ".$_POST["viaggio"]."<br>";
         echo "Data: ".$_POST["data"]."<br>";
-        if(isset($_POST["open"]))
-        {
-          echo "Aperta: si<br>";
-          $open=true;
-        }
-        else
-        {
-          echo "Aperta: no<br>";
-          $open=false;
-        } ?>
+        ?>
     
     <form method="post" action="">
       <input type="hidden" name="viaggio" value="<?php echo $_POST["viaggio"] ?>">
       <input type="hidden" name="data" value="<?php echo $_POST["data"] ?>">
-      <input type="hidden" name="open" value="<?php echo $open ?>">
       <input type="hidden" name="crea" value="<?php echo true ?>">
       <input type="submit" name="send" value="Conferma">
       <input type="button" name="edit" value="Correggi" onclick="goBack()"><br>
@@ -111,7 +100,6 @@
                     ?>
                </select><br>
       Data: <input type="date" name="data"><br>
-      Aperta: <input type="checkbox" name="open"> Si<br>
       <input type="submit" name="crea" value="Crea">
     </form>
     
