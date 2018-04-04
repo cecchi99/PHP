@@ -43,7 +43,7 @@
       $dbh=new PDO($connection,$username,$password);
       $dbh->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
       
-      $query=$dbh->prepare("SELECT * FROM Prenotazione p INNER JOIN Viaggio v ON p.idViaggio=v.idViaggio INNER JOIN Auto a ON v.idAuto=a.targa WHERE p.disponibile=1 AND v.idAutista=:autista");
+      $query=$dbh->prepare("SELECT * FROM Prenotazione p INNER JOIN Viaggio v ON p.idViaggio=v.idViaggio INNER JOIN Auto a ON v.idAuto=a.targa WHERE p.disponibile=1 AND p.idAutista=:autista");
       $query->bindValue(":autista",$_SESSION["idAutista"]);
       $query->execute();
       
