@@ -124,7 +124,7 @@
     ?>
     
     <form name="registerform" method="post" action="" onsubmit="return Check()">
-      Tipo utente: <input type="radio" name="tipo" value="passeggero" checked>Passeggero <input type="radio" name="tipo" value="autista">Autista<br>
+      Tipo utente: <input type="radio" name="tipo" value="passeggero" onchange="User(this.value)" checked>Passeggero <input type="radio" name="tipo" value="autista" onchange="Hide(this.value);">Autista<br>
       Cognome: <input type="text" name="nome"><br>
       Nome: <input type="text" name="cognome"><br>
       Email: <input type="email" name="email"><br>
@@ -135,7 +135,7 @@
       Sesso: <input type="radio" name="sesso" value="m" checked>Maschio <input type="radio" name="sesso" value="f">Femmina<br>
       Nazionalita': <input type="text" name="nazionalita"><br>
       Numero patente: <input type="text" name="patente"><br>
-      Scadenza patente: <input type="date" name="scadenza"><br> 
+      Scadenza patente: <input type="date" name="scadenza"><br>
       <input type="submit" name="register" value="Registra">
       <input type="reset" name="delete" value="Cancella"><br>
       

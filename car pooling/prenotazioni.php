@@ -58,8 +58,23 @@
       }
       else
       {
-        echo "Viaggio: ".$_POST["viaggio"]."<br>";
-        echo "Data: ".$_POST["data"]."<br>";
+        try
+        {
+          $dbh=new PDO($connection,$username,$password);
+          $dbh->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
+          
+          $query=$dbh->prepare("SELECT * FROM Viaggio WHERE idViaggio=:idViaggio");
+          $query->bindValue(":idViaggio",$_POST["viaggio"]);
+          $query->execute();
+          $row=$query->fetch();
+          
+          echo "Viaggio: ".$row["partenza"]." - ".$row["destinazione"]."<br>";
+          echo "Data: ".$_POST["data"]."<br>";
+        }
+        catch(Exception $e)
+        {
+          echo $e->getMessage()."<br>";
+        }
         ?>
     
     <form method="post" action="">
