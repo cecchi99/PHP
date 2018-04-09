@@ -8,9 +8,9 @@ if(isset($_SESSION["email"]))
 
 <html>
   <head>
-    <title>Car pooling</title>
+    <title>DriveLend</title>
   </head>
-  <body>
+  <body>  
     <h1>Home</h1>
     
     <a href="register.php">Registrati</a><br>

@@ -1,20 +1,13 @@
-<?php session_start(); ?>
+<?php session_start();
+include "connection.php";
+?>
 
 <html>
   <head>
-    <title>Car pooling</title>
+    <title>DriveLend</title>
   </head>
   <body>
     <script>
-      function Check()
-      {
-        if(prenotaform.data.value=="")
-        {
-          alert("Inserire data!");
-          return false;
-        }
-      }
-      
       function goBack() 
       {
         window.history.back();
@@ -24,19 +17,12 @@
     <h1>Creazione prenotazione</h1>
     
     <?php
-    $connection="mysql:host=localhost;dbname=quintab_cecchi";
-    $username="root";
-    $password="quintab";
-    
     if(isset($_POST["crea"]))
     {
       if(isset($_POST["send"]))
       {
         try
         {
-          $dbh=new PDO($connection,$username,$password);
-          $dbh->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
-          
           $query=$dbh->prepare("INSERT INTO Prenotazione(idAutista,idViaggio,data,disponibile) VALUES(:idAutista,:idViaggio,:data,true)");
           $query->bindValue(":idAutista",$_SESSION["idAutista"]);
           $query->bindValue(":idViaggio",$_POST["viaggio"]);
@@ -60,9 +46,6 @@
       {
         try
         {
-          $dbh=new PDO($connection,$username,$password);
-          $dbh->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
-          
           $query=$dbh->prepare("SELECT * FROM Viaggio WHERE idViaggio=:idViaggio");
           $query->bindValue(":idViaggio",$_POST["viaggio"]);
           $query->execute();
@@ -91,9 +74,6 @@
     {
      try
      {
-       $dbh=new PDO($connection,$username,$password);
-       $dbh->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
-      
        $query=$dbh->prepare("SELECT * FROM Viaggio WHERE idAutista=:idAutista");
        $query->bindValue(":idAutista",$_SESSION["idAutista"]);
        $query->execute();
@@ -105,7 +85,7 @@
        else
        { ?>
          
-    <form name="prenotaform" method="post" action="" onsubmit="return Check()">
+    <form name="prenotaform" method="post" action="">
       Viaggio: <select name="viaggio">
                     <?php
                     while($row=$query->fetch())
@@ -114,7 +94,7 @@
                     }
                     ?>
                </select><br>
-      Data: <input type="date" name="data"><br>
+      Data: <input type="date" name="data" required><br>
       <input type="submit" name="crea" value="Crea">
     </form>
     

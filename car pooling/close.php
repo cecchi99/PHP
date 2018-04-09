@@ -2,7 +2,7 @@
 
 <html>
   <head>
-    <title>Car pooling</title>
+    <title>DriveLend</title>
   </head>
   <body>
     <h1>Prenotazioni aperte</h1>

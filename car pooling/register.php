@@ -1,18 +1,15 @@
+<?php include "connection.php"; ?>
+
 <html>
   <head>
-    <title>Car pooling</title>
+    <title>DriveLend</title>
   </head>
   <body>
     
     <script>
       function Check()
       {
-        if(registerform.cognome.value==""||registerform.nome.value==""||registerform.email.value==""||registerform.password.value==""||registerform.telefono.value==""||registerform.nascita.value=="")
-        {
-          alert("Impossibile elaborare campi vuoti!");
-          return false;
-        }
-        else if(registerform.password.value!=registerform.check_password.value)
+        if(registerform.password.value!=registerform.check_password.value)
         {
           alert("Le password non coincidono!");
           return false;
@@ -28,19 +25,12 @@
     <h1>Registrazione</h1>
     
     <?php
-    $connection="mysql:host=localhost;dbname=quintab_cecchi";
-    $username="root";
-    $password="quintab";
-    
     if(isset($_POST["register"]))
     {
       if(isset($_POST["send"]))
       {
         try
         {
-          $dbh=new PDO($connection,$username,$password);
-          $dbh->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
-      
           if($_POST["tipo"]=="passeggero")
           {
             $query=$dbh->prepare("INSERT INTO Passeggero(cognome,nome,email,password,telefono,dataNascita,sesso,nazionalita) VALUES (:cognome,:nome,:email,:password,:telefono,:dataNascita,:sesso,:nazionalita)");
@@ -125,17 +115,17 @@
     
     <form name="registerform" method="post" action="" onsubmit="return Check()">
       Tipo utente: <input type="radio" name="tipo" value="passeggero" onchange="User(this.value)" checked>Passeggero <input type="radio" name="tipo" value="autista" onchange="Hide(this.value);">Autista<br>
-      Cognome: <input type="text" name="nome"><br>
-      Nome: <input type="text" name="cognome"><br>
-      Email: <input type="email" name="email"><br>
-      Password: <input type="password" name="password"><br>
-      Conferma password: <input type="password" name="check_password"><br>
-      Telefono: <input type="text" name="telefono"><br>
-      Data di nascita: <input type="date" name="nascita"><br>
+      Cognome: <input type="text" name="nome" required><br>
+      Nome: <input type="text" name="cognome" required><br>
+      Email: <input type="email" name="email" required><br>
+      Password: <input type="password" name="password" required><br>
+      Conferma password: <input type="password" name="check_password" required><br>
+      Telefono: <input type="text" name="telefono" required><br>
+      Data di nascita: <input type="date" name="nascita" required><br>
       Sesso: <input type="radio" name="sesso" value="m" checked>Maschio <input type="radio" name="sesso" value="f">Femmina<br>
-      Nazionalita': <input type="text" name="nazionalita"><br>
-      Numero patente: <input type="text" name="patente"><br>
-      Scadenza patente: <input type="date" name="scadenza"><br>
+      Nazionalita': <input type="text" name="nazionalita" required><br>
+      Numero patente: <input type="text" name="patente" required><br>
+      Scadenza patente: <input type="date" name="scadenza" required><br>
       <input type="submit" name="register" value="Registra">
       <input type="reset" name="delete" value="Cancella"><br>
       

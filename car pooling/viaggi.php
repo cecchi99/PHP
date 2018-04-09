@@ -1,19 +1,16 @@
-<?php session_start(); ?>
+<?php session_start(); 
+include "connection.php";
+?>
 
 <html>
   <head>
-    <title>Car pooling</title>
+    <title>DriveLend</title>
   </head>
   <body>
     <script>
       function Check()
       {
-        if(viaggioform.partenza.value==""||viaggioform.destinazione.value==""||viaggioform.data.value==""||viaggioform.oraPartenza.value==""||viaggioform.oraArrivo.value==""||viaggioform.importo.value==""||viaggioform.durata.value=="")
-        {
-          alert("Impossibile elaborare campi vuoti!");
-          return false;
-        }
-        else if(viaggioform.partenza.value==viaggioform.destinazione.value)
+        if(viaggioform.partenza.value==viaggioform.destinazione.value)
         {
           alert("La citta' di partenza non puo' essere uguale a quella di destinazione!");
           return false;
@@ -39,19 +36,12 @@
     <h1>Creazione viaggio</h1>
     
     <?php
-    $connection="mysql:host=localhost;dbname=quintab_cecchi";
-    $username="root";
-    $password="quintab";
-    
     if(isset($_POST["crea"]))
     {
       if(isset($_POST["send"]))
       {
         try
         {
-          $dbh=new PDO($connection,$username,$password);
-          $dbh->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
-          
           $query=$dbh->prepare("INSERT INTO Viaggio(partenza,destinazione,data,oraPartenza,oraArrivo,importo,durata,bagagli,animali,idAutista,idAuto) VALUES(:partenza,:destinazione,:data,:oraPartenza,:oraArrivo,:importo,:durata,:bagagli,:animali,:idAutista,:idAuto)");
           $query->bindValue(":partenza",$_POST["partenza"]);
           $query->bindValue(":destinazione",$_POST["destinazione"]);
@@ -126,9 +116,6 @@
     {
       try
       { 
-       $dbh=new PDO($connection,$username,$password);
-       $dbh->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
-      
        $query=$dbh->prepare("SELECT * FROM Auto WHERE idAutista=:idAutista");
        $query->bindValue(":idAutista",$_SESSION["idAutista"]);
        $query->execute();
@@ -141,13 +128,13 @@
        { ?>
           
      <form name="viaggioform" method="post" action="" onsubmit="return Check()">
-      Partenza: <input type="text" name="partenza"><br>
-      Destinazione: <input type="text" name="destinazione"><br>
-      Data: <input type="date" name="data"><br>
-      Ora partenza: <input type="time" name="oraPartenza"><br>
-      Ora arrivo: <input type="time" name="oraArrivo"><br>
-      Importo: <input type="text" name="importo"> euro<br>
-      Durata: <input type="text" name="durata"> minuti<br>
+      Partenza: <input type="text" name="partenza" required><br>
+      Destinazione: <input type="text" name="destinazione" required><br>
+      Data: <input type="date" name="data" required><br>
+      Ora partenza: <input type="time" name="oraPartenza" required><br>
+      Ora arrivo: <input type="time" name="oraArrivo" required><br>
+      Importo: <input type="text" name="importo" required> euro<br>
+      Durata: <input type="text" name="durata" required> minuti<br>
       <input type="checkbox" name="bagagli"> Bagagli<br>
       <input type="checkbox" name="animali"> Animali<br>
       Auto: <select name="auto">

@@ -1,28 +1,19 @@
-<?php session_start(); ?>
+<?php session_start();
+include "connection.php";
+?>
 
 <html>
   <head>
-    <title>Car pooling</title>
+    <title>DriveLend</title>
   </head>
   <body>
     <h1>Prenota viaggio</h1>
     
     <?php
-    $connection="mysql:host=localhost;dbname=quintab_cecchi";
-    $username="root";
-    $password="quintab";
-    
     if(isset($_POST["send"]))
     {
       try
-      {
-        $dbh=new PDO($connection,$username,$password);
-        $dbh->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
-        
-        $query=$dbh->prepare("UPDATE Prenotazione SET idPasseggero=:idPasseggero WHERE idPrenotazione=:idPrenotazione");
-        $query->bindValue(":idPasseggero",$_POST["passeggero"]);
-        $query->bindValue(":idPrenotazione",$_POST["prenotazione"]);
-        
+      {  
         if($query->execute()==false)
         {
           echo "Errore nella prenotazione!<br>";
@@ -41,9 +32,6 @@
     {
     try
     {
-      $dbh=new PDO($connection,$username,$password);
-      $dbh->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
-      
       $query=$dbh->prepare("SELECT * FROM Prenotazione p INNER JOIN Viaggio v ON p.idViaggio=v.idViaggio INNER JOIN Auto a ON v.idAuto=a.targa INNER JOIN Autista au ON v.idAutista=au.idAutista WHERE p.disponibile=1");
       $query->execute();
       

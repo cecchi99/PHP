@@ -1,19 +1,16 @@
-<?php session_start(); ?>
+<?php session_start(); 
+include "connection.php";
+?>
 
 <html>
   <head>
-    <title>Car pooling</title>
+    <title>DriveLend</title>
   </head>
   <body>
     <script>
       function Check()
       {
-        if(autoform.targa.value==""||autoform.marca.value==""||autoform.modello.value==""||autoform.cilindrata.value==""||autoform.potenza.value=="")
-          {
-            alert("Impossibile elaborare campi vuoti!");
-            return false;
-          }
-        else if(Number.isNaN(Number.parseInt(autoform.cilindrata.value))||Number.isNaN(Number.parseFloat(autoform.potenza.value)))
+        if(Number.isNaN(Number.parseInt(autoform.cilindrata.value))||Number.isNaN(Number.parseFloat(autoform.potenza.value)))
           {
             alert("Cilindrata e potenza devono essere valori numerici!");
             return false;
@@ -29,19 +26,12 @@
     <h1>Registrazione auto</h1>
     
     <?php
-    $connection="mysql:host=localhost;dbname=quintab_cecchi";
-    $username="root";
-    $password="quintab";
-    
     if(isset($_POST["register"]))
     {
       if(isset($_POST["send"]))
       {
         try
         {
-          $dbh=new PDO($connection,$username,$password);
-          $dbh->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
-          
           $query=$dbh->prepare("INSERT INTO Auto(targa,marca,modello,cilindrata,potenza,idAutista) VALUES(:targa,:marca,:modello,:cilindrata,:potenza,:idAutista)");
           $query->bindValue(":targa",$_POST["targa"]);
           $query->bindValue(":marca",$_POST["marca"]);
@@ -92,11 +82,11 @@
     ?> 
       
     <form name="autoform" method="post" action="" onsubmit="return Check()">
-      Targa: <input type="text" name="targa"><br>
-      Marca: <input type="text" name="marca"><br>
-      Modello: <input type="text" name="modello"><br>
-      Cilindrata: <input type="text" name="cilindrata"><br>
-      Potenza: <input type="text" name="potenza"><br>
+      Targa: <input type="text" name="targa" required><br>
+      Marca: <input type="text" name="marca" required><br>
+      Modello: <input type="text" name="modello" required><br>
+      Cilindrata: <input type="text" name="cilindrata" required><br>
+      Potenza: <input type="text" name="potenza" required><br>
       <input type="submit" name="register" value="Registra">
       <input type="reset" name="delete" value="Cancella"><br>
     </form>

@@ -1,8 +1,10 @@
-<?php session_start(); ?>
+<?php session_start(); 
+include "connection.php";
+?>
 
 <html>
   <head>
-    <title>Car pooling</title>
+    <title>DriveLend</title>
   </head>
   <body>
     <script>
@@ -21,16 +23,9 @@
     <?php
     if(isset($_POST["login"]))
     {
-      $connection="mysql:host=localhost;dbname=quintab_cecchi";
-      $username="root";
-      $password="quintab";
-      
       try
       {
-        $dbh=new PDO($connection,$username,$password);
-        $dbh->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
-        
-        if($_POST["tipo"]=="passeggero")
+       if($_POST["tipo"]=="passeggero")
         {
           $query=$dbh->prepare("SELECT idPasseggero, email, password FROM Passeggero WHERE email=:email AND password=:password");
           $query->bindValue(":email",$_POST["email"]);
@@ -78,8 +73,8 @@
     
     <form name="loginform" method="post" action="" onsubmit="return isEmpty()">
       Tipo utente: <input type="radio" name="tipo" value="passeggero" checked>Passeggero <input type="radio" name="tipo" value="autista">Autista<br>
-      Email: <input type="email" name="email"><br>
-      Password: <input type="password" name="password"><br>
+      Email: <input type="email" name="email" required><br>
+      Password: <input type="password" name="password" required><br>
       <input type="submit" name="login" value="Accedi">
       <input type="reset" name="delete" value="Cancella">
     </form>
