@@ -4,6 +4,9 @@ $(document).ready(function(){
   $("#search1").click(function(){  
     $.getJSON("http://api.openweathermap.org/data/2.5/weather",{'q':$("#loc1").val(),'APPID':"08f26442f35c69050b5dc94377b4dc7f"},function (result){
      
+      //svuotamento tabella precedente
+      $("#meteo").empty();
+      
       //variabili tabella
       var loc="<tr><th>"+result.name+", "+result.sys.country+"</th><td>(lon="+result.coord.lon+", lat="+result.coord.lat+")</td></tr>";
       var main="<tr><td>Clima:</td><td>"+result.weather[0].main+"</td></tr>";
@@ -34,8 +37,11 @@ $(document).ready(function(){
   $("#search2").click(function(){  
     $.getJSON("http://api.openweathermap.org/data/2.5/forecast",{'q':$("#loc2").val(),'APPID':"08f26442f35c69050b5dc94377b4dc7f"},function (result){
      
+      //svuotamento tabella precedente
+      $("#previsioni").empty();
+      
       //variabili tabella
-      var loc="<tr><th>"+result.city.name+", "+result.country+"</th><td>(lon="+result.city.coord.lon+", lat="+result.city.coord.lat+")</td></tr>";
+      var loc="<tr><th>"+result.city.name+", "+result.city.country+"</th><td>(lon="+result.city.coord.lon+", lat="+result.city.coord.lat+")</td></tr>";
       var main="<tr><td>Clima:</td><td>"+result.list[0].weather[0].main+"</td></tr>";
       var dsc="<tr><td>Descrizione:</td><td>"+result.list[0].weather[0].description+"</td></tr>";
       var tmp="<tr><td>Temperatura:</td><td>"+result.list[0].main.temp+"°C</td></tr>";
@@ -55,7 +61,7 @@ $(document).ready(function(){
   
   //cancellazione dati previsioni
   $("#delete2").click(function(){
-    $("#meteo").empty();
+    $("#previsioni").empty();
     $("#loc2").val("");
   });
 });
