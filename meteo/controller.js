@@ -63,6 +63,9 @@ $(document).ready(function(){
   $("#search2").click(function(){  
     $.getJSON("http://api.openweathermap.org/data/2.5/forecast",{'q':$("#loc2").val(),'APPID':"08f26442f35c69050b5dc94377b4dc7f"},function (result){
      
+      //mostra select
+      $("#datetime").show();
+      
       //svuotamento tabella precedente
       $("#previsioni").empty();
       
@@ -99,9 +102,11 @@ $(document).ready(function(){
     });
   });
   
-  //cancellazione dati previsioni
+  //cancellazione dati previsioni select
   $("#delete2").click(function(){
     $("#previsioni").empty();
+    $("#datetime").empty();
+    $("#datetime").hide();
     $("#loc2").val("");
   });
 });
