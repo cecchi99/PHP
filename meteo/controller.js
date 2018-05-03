@@ -54,6 +54,16 @@ $(document).ready(function(){
       var tb=loc+main+dsc+tmp+pr+hum+spd+deg;
       $("#previsioni").append(tb);
       
+      //svuotamento select precedente
+      $("#datetime").empty();
+      
+      //data e ora nella select
+      $.each(result, function(k,v)
+      {
+        var datetime="<option value='"+v["list.dt_txt"]+"'>"+v["list.dt_txt"]+"</option>";
+        $("#datetime").append(datetime);
+      });
+      
     }).fail(function(){
       alert("Localita' inesistente!");
     });
