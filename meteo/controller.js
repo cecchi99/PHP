@@ -1,3 +1,30 @@
+//previsioni per data e ora
+function Change(sel)
+{
+  $.getJSON("http://api.openweathermap.org/data/2.5/forecast",{'q':$("#loc2").val(),'APPID':"08f26442f35c69050b5dc94377b4dc7f"},function (result){
+     
+      //svuotamento tabella precedente
+      $("#previsioni").empty();
+      
+      //variabili tabella della option datetime selezionata
+      var loc="<tr><th>"+result.city.name+", "+result.city.country+"</th><td>(lon="+result.city.coord.lon+", lat="+result.city.coord.lat+")</td></tr>";
+      var main="<tr><td>Clima:</td><td>"+result.list[sel.value].weather[0].main+"</td></tr>";
+      var dsc="<tr><td>Descrizione:</td><td>"+result.list[sel.value].weather[0].description+"</td></tr>";
+      var tmp="<tr><td>Temperatura:</td><td>"+result.list[sel.value].main.temp+"°C</td></tr>";
+      var pr="<tr><td>Pressione:</td><td>"+result.list[sel.value].main.pressure+" hpa</td></tr>";
+      var hum="<tr><td>Umidita':</td><td>"+result.list[sel.value].main.humidity+"%</td></tr>";
+      var spd="<tr><td>Velocita' vento:</td><td>"+result.list[sel.value].wind.speed+" m/s</td></tr>";
+      var deg="<tr><td>Direzione vento:</td><td>"+result.list[sel.value].wind.deg+"°</td></tr>";
+      
+      //valori in tabella aggiornata
+      var tb=loc+main+dsc+tmp+pr+hum+spd+deg;
+      $("#previsioni").append(tb);
+      
+    }).fail(function(){
+      alert("Localita' inesistente!");
+    });
+}
+
 $(document).ready(function(){
   
   //dati meteo tramite località
@@ -16,10 +43,9 @@ $(document).ready(function(){
       var hum="<tr><td>Umidita':</td><td>"+result.main.humidity+"%</td></tr>";
       var spd="<tr><td>Velocita' vento:</td><td>"+result.wind.speed+" m/s</td></tr>";
       var deg="<tr><td>Direzione vento:</td><td>"+result.wind.deg+"°</td></tr>";
-      var vis="<tr><td>Visibilita':</td><td>"+result.visibility+"</td></tr>";
       
       //valori in tabella
-      var tb=loc+main+dsc+tmp+pr+hum+spd+deg+vis;
+      var tb=loc+main+dsc+tmp+pr+hum+spd+deg;
       $("#meteo").append(tb);
       
     }).fail(function(){
@@ -57,11 +83,15 @@ $(document).ready(function(){
       //svuotamento select precedente
       $("#datetime").empty();
       
+      //variabile contatore
+      var n=0;
+      
       //data e ora nella select
-      $.each(result, function(k,v)
+      $.each(result.list, function(k,v)
       {
-        var datetime="<option value='"+v["list.dt_txt"]+"'>"+v["list.dt_txt"]+"</option>";
+        var datetime="<option value='"+n+"'>"+v["dt_txt"]+"</option>";
         $("#datetime").append(datetime);
+        n++;
       });
       
     }).fail(function(){
