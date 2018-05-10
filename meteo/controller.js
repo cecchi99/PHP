@@ -73,7 +73,10 @@ $(document).ready(function(){
       //mostra select
       $("#datetime").show();
       
+      //associazione dati ricevuti all variabile globale
       data=result;
+      
+      //richiamo funzione previsioni
       Forecast(0,data);
       
       //svuotamento select precedente
@@ -85,6 +88,7 @@ $(document).ready(function(){
       //data e ora nella select
       $.each(result.list, function(k,v)
       {
+        //costruzione opzioni della select
         var datetime="<option value='"+n+"'>"+v["dt_txt"]+"</option>";
         $("#datetime").append(datetime);
         n++;
