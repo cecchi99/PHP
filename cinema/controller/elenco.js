@@ -1,6 +1,6 @@
 $(document).ready(function(){
  
-  //elenco film ricevuti dal database
+  //elenco film dal database
   $.getJSON("script/elencoFilm.php",function(result){
     //creazione option con i film
     $.each(result,function(k,v)
@@ -9,4 +9,10 @@ $(document).ready(function(){
       $("elencoFilm").append(opt);
     });
   });
+  
+  //elenco cinema dal database
+  
+  
+  //elenco programmazioni dal database
+  
 });
