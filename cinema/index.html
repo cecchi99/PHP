@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Cinepanettone</title>
+    
+    <meta charset="utf-8"> 
+    
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+    
+    <!-- controller -->
+    <script src="http://code.jquery.com/jquery-1.6.4.min.js" type="text/javascript"></script> 
+    <script src="controller/elenco.js"></script>
+  </head>
+  <body>
+    
+    <!-- header pagina -->
+    <div class="jumbotron text-center">
+      <h1>Cinepanettone</h1>
+    </div>
+    
+    <!-- contenuto pagina -->
+    <div class="container">
+      <div class="row">
+        <!-- elenco film -->
+        <div class="col-sm-4">
+          <select id="elencoFilm"></select>
+          <button id="filmbtn" type="button" class="btn btn-primary">Dettagli</button>
+          <table id="dettagliFilm"></table>
+        </div>
+        <!-- elenco cinema -->
+        <div class="col-sm-4">
+          <select id="elencoCinema"></select>
+          <button id="cinemabtn" type="button" class="btn btn-primary">Dettagli</button>
+          <table id="dettagliCinema"></table>
+        </div>
+        <!-- elenco programmazioni -->
+        <div class="col-sm-4">
+          <select id="elencoProg"></select>
+          <button id="progbtn" type="button" class="btn btn-primary">Dettagli</button>
+          <table id="dettagliProg"></table>
+        </div>
+      </div>
+    </div>
+    
+  </body>
+</html>
