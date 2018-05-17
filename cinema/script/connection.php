@@ -1,5 +1,5 @@
 <?php
-$connection="mysql:host=localhost;dbname=quintab_cecchi";
+$connection="mysql:host=localhost;dbname=quintab_cecchi;charset=utf8";
 $username="root";
 $password="quintab";
 
