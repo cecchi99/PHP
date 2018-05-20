@@ -12,6 +12,7 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
     <script src="controller/elenco.js"></script>
     <script src="controller/dettagli.js"></script>
+    <script src="controller/delete.js"></script>
   </head>
   <body>
     
@@ -25,22 +26,40 @@
       <div class="row">
         <!-- elenco film -->
         <div id="film" class="col-sm-4">
+          <h2>Film</h2>
           <select id="elencoFilm"></select>
           <button id="filmbtn" class="btn btn-primary">Dettagli</button>
-          <table id="dettagliFilm"></table>
-          <table id="interpreti"></table>
+          <button id="filmdlt" class="btn btn-danger">Cancella</button>
+          <div id="divFilm" style="display:none">
+            <h2>Dettagli film</h2>
+            <table id="dettagliFilm"></table>
+          </div>
+          <div id="divInt" style="display:none">
+            <h2>Interpreti</h2>
+            <table id="interpreti"></table>
+          </div>
         </div>
         <!-- elenco cinema -->
         <div class="col-sm-4">
+          <h2>Cinema</h2>
           <select id="elencoCinema"></select>
           <button id="cinemabtn" class="btn btn-primary">Dettagli</button>
-          <table id="dettagliCinema"></table>
+          <button id="cinemadlt" class="btn btn-danger">Cancella</button>
+          <div id="divCinema" style="display:none">
+            <h2>Dettagli cinema</h2>
+            <table id="dettagliCinema"></table>
+          </div>
         </div>
         <!-- elenco programmazioni -->
         <div class="col-sm-4">
+          <h2>Programmazioni</h2>
           <select id="elencoProg"></select>
           <button id="progbtn" class="btn btn-primary">Dettagli</button>
-          <table id="dettagliProg"></table>
+          <button id="progdlt" class="btn btn-danger">Cancella</button>
+          <div id="divProg" style="display:none">
+            <h2>Dettagli programmazione</h2>
+            <table id="dettagliProg"></table>
+          </div>
         </div>
       </div>
     </div>
