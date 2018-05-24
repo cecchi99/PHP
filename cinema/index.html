@@ -13,17 +13,20 @@
     <script src="controller/elenco.js"></script>
     <script src="controller/dettagli.js"></script>
     <script src="controller/delete.js"></script>
+    <script src="controller/login.js"></script>
   </head>
   <body>
     
     <!-- header pagina -->
     <div class="jumbotron text-center">
       <h1>Cinepanettone</h1>
+      <a href="#admin" id="link">Accedi come amministratore</a>
+      <a href="#logout" id="logout" style="display:none">Disconnetti</a>
     </div>
     
     <!-- contenuto pagina -->
     <div class="container">
-      <div class="row">
+      <div class="row" id="elenchi">
         <!-- elenco film -->
         <div id="film" class="col-sm-4">
           <h2>Film</h2>
@@ -60,6 +63,18 @@
             <h2>Dettagli programmazione</h2>
             <table id="dettagliProg"></table>
           </div>
+        </div>
+      </div>
+      
+      <!-- login admin -->
+      <div class="row" id="admin" style="display:none">
+        <div class="col-sm-6">
+          <form id="loginForm">
+            Email: <input type="email" id="email"><br>
+            Password: <input type="password" id="password"><br>
+            <button id="login" class="btn btn-primary">Accedi</button>
+            <button id="cancel" class="btn btn-danger">Annulla</button>
+          </form>
         </div>
       </div>
     </div>
