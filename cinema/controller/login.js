@@ -26,6 +26,7 @@ $(document).ready(function(){
               $("#logout").show();
               $("#elenchi").show();
               $("#admin").hide();
+              $("#opAdmin").show();
             }
         });
       }
@@ -44,7 +45,13 @@ $(document).ready(function(){
   
   //link logout
   $("#logout").click(function(){
-    location.reload();
+    $("#logout").hide();
+    $("#link").show();
+    $("#opAdmin").hide();
+    
+    //svuotamento caselle di testo
+    $("#email").val("");
+    $("#password").val("");
   });
   
 });

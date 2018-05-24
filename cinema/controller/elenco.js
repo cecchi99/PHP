@@ -25,7 +25,7 @@ $(document).ready(function(){
     //creazione option con le programmazioni
     $.each(result,function(k,v)
     {
-      var opt="<option value='"+v["codProg"]+"'>"+v["dataProiezione"]+"</option>";
+      var opt="<option value='"+v["dataProiezione"]+"'>"+v["dataProiezione"]+"</option>";
       $("#elencoProg").append(opt);
     });
   });

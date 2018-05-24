@@ -28,12 +28,11 @@ $(document).ready(function(){
     $.getJSON("script/interpreti.php",{"idFilm":$("#elencoFilm").val()},function(result){
       
       //creazione campi tabella interpreti
+      var th="<tr><th>Nome</th><th>Cognome</th><th>Personaggio</th></tr>";
+      $("#interpreti").append(th);
       $.each(result,function(k,v){
-        var nome="<tr><th>Nome</th><td>"+v["nome"]+"<td></tr>";
-        var cognome="<tr><th>Cognome</th><td>"+v["cognome"]+"<td></tr>";
-        var personaggio="<tr><th>Personaggio</th><td>"+v["personaggio"]+"<td></tr>";
-        var tb=nome+cognome+personaggio;
-        $("#interpreti").append(tb);
+        var td="<tr><td>"+v["nome"]+"</td><td>"+v["cognome"]+"</td><td>"+v["personaggio"]+"</td></tr>";
+        $("#interpreti").append(td);
       });
     });
   });
@@ -63,14 +62,15 @@ $(document).ready(function(){
     $("#divProg").show();
     
     //reperimento dati programmazione
-    $.getJSON("script/dettagliProg.php",{"codProg":$("#elencoProg").val()},function(result){
+    $.getJSON("script/dettagliProg.php",{"dataProiezione":$("#elencoProg").val()},function(result){
       
       //creazione campi tabella programmazioni
-      var titolo="<tr><th>Film</th><td>"+result.titolo+"<td></tr>";
-      var cinema="<tr><th>Cinema</th><td>"+result.nome+"<td></tr>";
-      var citta="<tr><th>Citta'</th><td>"+result.citta+"<td></tr>";
-      var tb=titolo+cinema+citta;
-      $("#dettagliProg").append(tb);
+      var th="<tr><th>Film</th><th>Cinema</th><th>Citta'</th></tr>";
+      $("#dettagliProg").append(th);
+      $.each(result,function(k,v){
+        var td="<tr><td>"+v["titolo"]+"</td><td>"+v["nome"]+"</td><td>"+v["citta"]+"</td></tr>";
+        $("#dettagliProg").append(td);
+      });
     });
   });
   
