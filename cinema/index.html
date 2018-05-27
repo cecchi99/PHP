@@ -84,8 +84,67 @@
       <!-- operazioni admin -->
       <section id="opAdmin" style="diaplay:none">
         <div class="row">
+          <!-- attori -->
+          <div id="attore" class="col-sm-4">
+            <h2>Aggiungi attore</h2>
+            <form>
+              Cognome: <input type="text" id="cognome"><br>
+              Nome: <input type="text" id="nome"><br>
+              Sesso: <input type="radio" name="sesso" id="maschio" value="m" checked>Maschio <input type="radio" name="sesso" id="femmina" value="f">Femmina<br>
+              Anno di nascita: <input type="text" id="annoNascita"><br>
+              Nazionalita': <input type="text" id="nazionalita"><br>
+              <button id="adAttore" class="btn btn-primary">Aggiungi</button>
+              <input type="reset" value="Cancella" class="btn btn-danger">
+            </form>
+          </div>
+          <!-- film -->
           <div id="film" class="col-sm-4">
-            
+            <h2>Aggiungi film</h2>
+            <form>
+              Titolo: <input type="text" id="titolo"><br>
+              Anno produzione: <input type="text" id="annoProduzione"><br>
+              Luogo produzione: <input type="text" id="luogoProduzione"><br>
+              Cognome regista: <input type="text" id="regista"><br>
+              Genere: <input type="text" id="genere"><br>
+              <button id="adFilm" class="btn btn-primary">Aggiungi</button>
+              <input type="reset" value="Cancella" class="btn btn-danger">
+            </form>
+          </div>
+          <!-- interpreta -->
+          <div id="int" class="col-sm-4">
+            <h2>Aggiungi interpreta</h2>
+            <form>
+              Film: <select class="film"></select><br>
+              Attore: <select class="attore"></select><br>
+              Personaggio: <input type="text" id="personaggio"><br>
+              <button id="adInt" class="btn btn-primary">Aggiungi</button>
+              <input type="reset" value="Cancella" class="btn btn-danger">
+            </form>
+          </div>
+        </div>
+        <div class="row">
+          <!-- cinema -->
+          <div id="cinema" class="col-sm-4">
+            <h2>Aggiungi cinema</h2>
+            <form>
+              Nome: <input type="text" id="nomeCinema"><br>
+              Posti: <input type="text" id="posti"><br>
+              Citta': <input type="text" id="citta"><br>
+              <button id="adCinema" class="btn btn-primary">Aggiungi</button>
+              <input type="reset" value="Cancella" class="btn btn-danger">
+            </form>
+          </div>
+          <!-- programmazione -->
+          <div id="programmato" class="col-sm-4">
+            <h2>Aggiungi programmazione</h2>
+            <form>
+              Film: <select class="film"></select><br>
+              Cinema: <select class="cinema"></select><br>
+              Incasso: <input type="text" id="incasso"><br>
+              Data proiezione: <input type="date" id="dataProiezione"><br>
+              <button id="adPro" class="btn btn-primary">Aggiungi</button>
+              <input type="reset" value="Cancella" class="btn btn-danger">
+            </form>
           </div>
         </div>
       </section>
