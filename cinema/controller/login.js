@@ -24,7 +24,7 @@ $(document).ready(function(){
             {
               alert("Accesso eseguito con: "+result.email);
               $("#logout").show();
-              $("#elenchi").show();
+              $("#elenchi").hide();
               $("#admin").hide();
               $("#opAdmin").show();
             }
@@ -48,6 +48,7 @@ $(document).ready(function(){
     $("#logout").hide();
     $("#link").show();
     $("#opAdmin").hide();
+    $("#elenchi").show();
     
     //svuotamento caselle di testo
     $("#email").val("");

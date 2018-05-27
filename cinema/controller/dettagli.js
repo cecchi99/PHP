@@ -7,9 +7,9 @@ $(document).ready(function(){
     $("#dettagliFilm").empty();
     $("#interpreti").empty();
     
-    //mostra display
+    //modifica display
     $("#divFilm").show();
-    $("#divInt").show();
+    $("#divInt").hide();
     
     //reperimento dati film
     $.getJSON("script/dettagliFilm.php",{"idFilm":$("#elencoFilm").val()},function(result){
@@ -26,14 +26,21 @@ $(document).ready(function(){
     
     //reperimento dati interpreti
     $.getJSON("script/interpreti.php",{"idFilm":$("#elencoFilm").val()},function(result){
-      
-      //creazione campi tabella interpreti
-      var th="<tr><th>Nome</th><th>Cognome</th><th>Personaggio</th></tr>";
-      $("#interpreti").append(th);
-      $.each(result,function(k,v){
-        var td="<tr><td>"+v["nome"]+"</td><td>"+v["cognome"]+"</td><td>"+v["personaggio"]+"</td></tr>";
-        $("#interpreti").append(td);
-      });
+     
+      //controllo se presenti interpreti
+      if(result!==false)
+        {
+          //mostra display
+          $("#divInt").show();
+          
+          //creazione campi tabella interpreti
+          var th="<tr><th>Nome</th><th>Cognome</th><th>Personaggio</th></tr>";
+          $("#interpreti").append(th);
+          $.each(result,function(k,v){
+            var td="<tr><td>"+v["nome"]+"</td><td>"+v["cognome"]+"</td><td>"+v["personaggio"]+"</td></tr>";
+            $("#interpreti").append(td);
+          });
+        }
     });
   });
   
